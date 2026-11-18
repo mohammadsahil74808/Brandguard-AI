@@ -1,0 +1,539 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-canvas text-black font-sans antialiased selection:bg-crimson selection:text-white min-h-screen overflow-x-hidden;
+    background-color: #FBF8F3;
+    color: #121212;
+    /* Neubrutalism Subtle Dot Grid Pattern */
+    background-image: radial-gradient(rgba(18, 18, 18, 0.08) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+  }
+}
+
+/* Universal High-Contrast Color Guard:
+   1. All white, cream, and vibrant yellow/green/coral surfaces strictly have bold black text (#121212).
+   2. Solid crimson surfaces strictly have crisp white text (#FFFFFF).
+   3. Light pink badge pills (bg-crimson-50) strictly have deep crimson text (#9E022B) with dark crimson border.
+*/
+.bg-white,
+.bg-canvas,
+.bg-surface,
+.bg-cream-50,
+.bg-cream-100,
+.bg-cream-200,
+.bg-cream-300,
+.bg-popYellow,
+.bg-popGreen,
+.bg-popBlue,
+.bg-popCoral,
+.bg-popPurple,
+.brutal-card,
+.window-titlebar {
+  color: #121212;
+}
+
+.bg-popYellow {
+  background-color: #FFDE59 !important;
+}
+
+.bg-popGreen {
+  background-color: #00D26A !important;
+}
+
+.bg-popCoral {
+  background-color: #FF6B6B !important;
+}
+
+.bg-crimson {
+  background-color: #C50337 !important;
+}
+
+/* Light Pink / Crimson-50 tags: Bold dark crimson text on light pink background (Fix for Image 2) */
+.bg-crimson-50,
+.bg-crimson-100,
+.bg-crimson-light {
+  background-color: #FFF0F3 !important;
+  color: #9E022B !important;
+  border-color: #C50337 !important;
+}
+
+.bg-crimson-50 *,
+.bg-crimson-100 *,
+.bg-crimson-light * {
+  color: #9E022B !important;
+}
+
+.sidebar-brand-label {
+  color: #EDE4D5 !important;
+}
+
+.sidebar-brand-title {
+  color: #FDFBF7 !important;
+}
+
+.sidebar-menu-title {
+  color: #EDE4D5 !important;
+}
+
+/* Sidebar navigation buttons contrast guarantees */
+.sidebar-nav-btn-inactive {
+  background-color: #FFFFFF !important;
+  color: #121212 !important;
+  border: 2px solid #121212 !important;
+}
+
+.sidebar-nav-btn-inactive * {
+  color: #121212 !important;
+}
+
+.sidebar-nav-btn-active {
+  background-color: #C50337 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #121212 !important;
+}
+
+.sidebar-nav-btn-active * {
+  color: #FFFFFF !important;
+}
+
+/* Solid Crimson surfaces strictly use pure white text (No wildcard that corrupts bg-crimson-50!) */
+.bg-crimson,
+.bg-crimson-pop,
+.bg-crimson-600,
+.bg-crimson-700,
+.bg-crimson-dark,
+.brutal-btn-primary {
+  color: #FFFFFF !important;
+}
+
+.brutal-btn-primary * {
+  color: #FFFFFF !important;
+}
+
+/* Explicit high contrast utility overrides */
+.text-crimson {
+  color: #C50337 !important;
+}
+
+.text-ink {
+  color: #121212 !important;
+}
+
+.text-inkMuted {
+  color: #3b3b3b !important;
+}
+
+.text-black {
+  color: #121212 !important;
+}
+
+.text-white {
+  color: #FFFFFF !important;
+}
+
+/* Neubrutalism Core Components */
+.brutal-card {
+  background-color: #FFFFFF;
+  border: 2px solid #121212;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 0px 0px #121212;
+  color: #121212;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brutal-card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0px 0px #121212;
+}
+
+/* ==========================================================================
+   Tactile 3D Physical Button Engine ("Air-Flow & 3D Tilt")
+   ========================================================================== */
+
+/* 1. Base 3D Tactile Keycap Button */
+.btn-3d,
+.brutal-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #121212;
+  border-radius: 0.875rem;
+  font-weight: 900;
+  cursor: pointer;
+  user-select: none;
+  /* Physical 3D extrusion under the button */
+  box-shadow: 0 4px 0 0 #121212;
+  transform: translateY(0) translateZ(0);
+  transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.4, 1.2),
+              box-shadow 0.15s cubic-bezier(0.2, 0.9, 0.4, 1.2),
+              background-color 0.15s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Molded bevel highlight on top edge for realistic 3D acrylic/plastic texture */
+.btn-3d::before,
+.brutal-btn::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  right: 4px;
+  height: 38%;
+  border-radius: 0.65rem 0.65rem 4px 4px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+/* Air-flow floating hover with tactile 3D tilt */
+.btn-3d:hover:not(:disabled),
+.brutal-btn:hover:not(:disabled) {
+  transform: translateY(-3px) rotate(-0.6deg) scale(1.01);
+  box-shadow: 0 7px 0 0 #121212, 0 10px 18px -3px rgba(18, 18, 18, 0.22);
+}
+
+/* Alternate tilt for second button in a pair (balanced air flow dynamics) */
+.btn-3d.btn-3d-alt:hover:not(:disabled),
+.btn-3d:nth-child(even):hover:not(:disabled) {
+  transform: translateY(-3px) rotate(0.6deg) scale(1.01);
+}
+
+/* Deep physical press down when clicked (keycap mechanical switch sink) */
+.btn-3d:active:not(:disabled),
+.brutal-btn:active:not(:disabled) {
+  transform: translateY(4px) rotate(0deg) scale(0.99);
+  box-shadow: 0 0px 0 0 #121212;
+  transition-duration: 0.04s;
+}
+
+.btn-3d:disabled,
+.brutal-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 0 0 #121212;
+}
+
+/* Small 3D tactile button variant for secondary actions, badges & tabs */
+.btn-3d-sm {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #121212;
+  border-radius: 0.65rem;
+  font-weight: 800;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 3px 0 0 #121212;
+  transform: translateY(0);
+  transition: transform 0.12s cubic-bezier(0.2, 0.9, 0.4, 1.2),
+              box-shadow 0.12s cubic-bezier(0.2, 0.9, 0.4, 1.2),
+              background-color 0.12s ease;
+  will-change: transform, box-shadow;
+}
+
+.btn-3d-sm::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  right: 3px;
+  height: 35%;
+  border-radius: 0.5rem 0.5rem 3px 3px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.btn-3d-sm:hover:not(:disabled) {
+  transform: translateY(-2px) rotate(-0.5deg);
+  box-shadow: 0 5px 0 0 #121212, 0 6px 12px -2px rgba(18, 18, 18, 0.16);
+}
+
+.btn-3d-sm.btn-3d-alt:hover:not(:disabled),
+.btn-3d-sm:nth-child(even):hover:not(:disabled) {
+  transform: translateY(-2px) rotate(0.5deg);
+}
+
+.btn-3d-sm:active:not(:disabled) {
+  transform: translateY(3px) rotate(0deg);
+  box-shadow: 0 0px 0 0 #121212;
+  transition-duration: 0.04s;
+}
+
+.btn-3d-sm:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 1px 0 0 #121212;
+}
+
+/* Color Presets for 3D Buttons */
+.btn-3d-primary,
+.btn-3d-crimson {
+  background-color: #C50337 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-3d-primary *,
+.btn-3d-crimson * {
+  color: #FFFFFF !important;
+}
+
+.btn-3d-primary:hover:not(:disabled),
+.btn-3d-crimson:hover:not(:disabled) {
+  background-color: #E02B48 !important;
+}
+
+.btn-3d-yellow {
+  background-color: #FFDE59 !important;
+  color: #121212 !important;
+}
+
+.btn-3d-yellow * {
+  color: #121212 !important;
+}
+
+.btn-3d-yellow:hover:not(:disabled) {
+  background-color: #FEE77E !important;
+}
+
+.btn-3d-green {
+  background-color: #00D26A !important;
+  color: #121212 !important;
+}
+
+.btn-3d-green * {
+  color: #121212 !important;
+}
+
+.btn-3d-green:hover:not(:disabled) {
+  background-color: #24E583 !important;
+}
+
+.btn-3d-coral {
+  background-color: #FF6B6B !important;
+  color: #121212 !important;
+}
+
+.btn-3d-coral * {
+  color: #121212 !important;
+}
+
+.btn-3d-coral:hover:not(:disabled) {
+  background-color: #FF8585 !important;
+}
+
+.btn-3d-white {
+  background-color: #FFFFFF !important;
+  color: #121212 !important;
+}
+
+.btn-3d-white * {
+  color: #121212 !important;
+}
+
+.btn-3d-white:hover:not(:disabled) {
+  background-color: #FDFBF7 !important;
+}
+
+.brutal-btn-primary {
+  background-color: #C50337 !important;
+  color: #FFFFFF !important;
+}
+
+.brutal-btn-yellow {
+  background-color: #FFDE59 !important;
+  color: #121212 !important;
+}
+
+.brutal-btn-green {
+  background-color: #00D26A !important;
+  color: #121212 !important;
+}
+
+.brutal-btn-white {
+  background-color: #FFFFFF !important;
+  color: #121212 !important;
+}
+
+.brutal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border: 2px solid #121212;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  font-size: 0.75rem;
+  box-shadow: 2px 2px 0px 0px #121212;
+}
+
+.brutal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border: 2px solid #121212;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  box-shadow: 2px 2px 0px 0px #121212;
+}
+
+/* Retro Window Title Bar */
+.window-titlebar {
+  background-color: #F5EFE6;
+  border-bottom: 2px solid #121212;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top-left-radius: calc(1rem - 2px);
+  border-top-right-radius: calc(1rem - 2px);
+}
+
+.window-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.window-dots span:nth-child(1) {
+  background-color: #C50337;
+}
+.window-dots span:nth-child(2) {
+  background-color: #FBF8F3;
+}
+.window-dots span:nth-child(3) {
+  background-color: #FFDE59;
+}
+
+.window-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  border: 1.5px solid #121212;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FBF8F3;
+  border-left: 2px solid #121212;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFDE59;
+  border: 2px solid #121212;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C50337;
+}
+
+/* ==========================================================================
+   Motion Director & 3D Experience Polish
+   ========================================================================== */
+
+/* Smooth Staggered Page Entrance */
+@keyframes brutalPageIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-page-enter {
+  animation: brutalPageIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3D Floating Motion for Badges & Mascots */
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.8deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float3D 3.5s ease-in-out infinite;
+}
+
+/* 3D Layer Spatial Depth (pop out from card surface) */
+.tilt-depth-1 {
+  transform: translateZ(14px);
+  transform-style: preserve-3d;
+}
+
+.tilt-depth-2 {
+  transform: translateZ(28px);
+  transform-style: preserve-3d;
+}
+
+/* ==========================================================================
+   Tactile Rubber Stamp & Laser Scan Animations
+   ========================================================================== */
+
+/* Rubber Stamp Slam & Spring Bounce */
+@keyframes stampIn {
+  0% {
+    opacity: 0;
+    transform: scale(2.4) rotate(18deg);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(0.92) rotate(4deg);
+  }
+  85% {
+    transform: scale(1.04) rotate(7deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(6deg);
+  }
+}
+
+.stamp-bounce {
+  animation: stampIn 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Cybernetic Laser Scan Beam */
+@keyframes laserSweep {
+  0% {
+    top: 2%;
+    opacity: 0.9;
+  }
+  50% {
+    top: 92%;
+    opacity: 1;
+  }
+  100% {
+    top: 2%;
+    opacity: 0.9;
+  }
+}
+
+.laser-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #C50337, #FFDE59, #C50337, transparent);
+  box-shadow: 0 0 14px 3px rgba(197, 3, 55, 0.9), 0 0 24px 6px rgba(255, 222, 89, 0.6);
+  animation: laserSweep 2s ease-in-out infinite;
+  z-index: 10;
+  pointer-events: none;
+}

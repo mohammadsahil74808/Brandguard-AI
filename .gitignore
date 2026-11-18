@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.venv/
+env/
+venv/
+
+# Build outputs
+frontend/dist/
+dist/
+build/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+
+# Databases & local storage
+*.db
+*.sqlite3
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
